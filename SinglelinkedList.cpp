@@ -1,4 +1,4 @@
-#include "SingleLinkedlist.h"
+﻿#include "SingleLinkedlist.h"
 #include <algorithm>
 
 LinkedList::Node::Node(const ValueType& value, Node* next) {
