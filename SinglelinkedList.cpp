@@ -147,6 +147,7 @@ LinkedList::Node* LinkedList::getNode(const size_t pos) const {
 void LinkedList::insert(const size_t pos, const ValueType& value) {
 	Node* current = getNode(pos);
 	current->insertNext(value);
+	++_size;
 }
 
 void LinkedList::pushBack(const ValueType& value) {
@@ -158,6 +159,7 @@ void LinkedList::pushFront(const ValueType& value) {
 	Node* current = _head;
 	_head = newHead;
 	_head->_next = current;
+	++_size;
 	
 }
 
@@ -165,16 +167,19 @@ void LinkedList::popFront() {
 	Node* current = _head->_next;
 	delete _head;
 	_head = current;
+	--_size;
 }
 
 
 void LinkedList::remove(const size_t pos) {
 	Node* current = getNode(pos);
 	current->removeNext();
+	--_size;
 }
 void LinkedList::removeNextNode(Node* node) {
 	Node* current = findNode(node->_value);
 	current->removeNext();
+	--_size;
 }
 void LinkedList::removeFront(){
 	popFront();
@@ -183,6 +188,7 @@ void LinkedList::removeBack() {
 	Node* current = getNode((_size - 1));
 	delete current->_next;
 	current->_next = nullptr;
+	--_size;
 }
 
 long long int LinkedList::findIndex(const ValueType& value) const {
