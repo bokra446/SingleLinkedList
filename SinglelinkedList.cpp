@@ -154,8 +154,12 @@ void LinkedList::insert(const size_t pos, const ValueType& value) {
 	else {
 		current = getNode(pos - 1);
 	}
-	std::cout << current->_value << std::endl;
-	current->insertNext(value);
+	if (_head == nullptr) {
+		_head = new Node(value, nullptr);
+	}
+	else {
+		current->insertNext(value);
+	}
 	++_size;
 }
 
@@ -219,17 +223,17 @@ LinkedList::Node* LinkedList::findNode(const ValueType& value) const {
 }
 
 void LinkedList::reverse() {
-	Node* prevCurrent = nullptr;
 	Node* nextCurrent = _head->_next;
 	Node* current = _head;
-	Node* endNode = current;
-	for (size_t i = 0; i < _size; ++i) {
-		std::swap(prevCurrent, current->_next);
-		prevCurrent = current;
+	Node* endNode = getNode(_size - 1);
+	_head->_next = nullptr;
+	for (size_t i = 0; i < _size - 1; ++i) {
+		current->_next = endNode->_next;;
+		endNode->_next = current;
 		current = nextCurrent;
 		nextCurrent = current->_next;
 	}
-	_head = current;
+	_head = endNode;
 }
 
 LinkedList LinkedList::reverse() const {
@@ -262,7 +266,6 @@ void LinkedList::forceNodeDelete(Node* node)
 void LinkedList::clear() {
 	while (_size) {
 		popFront();
-		--_size;
 	}
 }
 
