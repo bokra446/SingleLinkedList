@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <cstddef>
 #include<iterator>
+#include <iostream>
 
 // потом поменяем на шаблоны
 using ValueType = int;
@@ -91,6 +92,8 @@ public:
 	size_t size() const;
 
 	void clear();
+
+	friend std::ostream& operator<<(std::ostream& o, LinkedList& list);
 private:
 	Node*	_head;
 	size_t	_size;

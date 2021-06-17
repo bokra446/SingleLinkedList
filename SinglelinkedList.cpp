@@ -151,7 +151,7 @@ void LinkedList::insert(const size_t pos, const ValueType& value) {
 }
 
 void LinkedList::pushBack(const ValueType& value) {
-	insert(_size, value);
+	insert(_size - 1, value);
 }
 
 void LinkedList::pushFront(const ValueType& value) {
@@ -255,4 +255,14 @@ void LinkedList::clear() {
 		popFront();
 		--_size;
 	}
+}
+
+std::ostream& operator<<(std::ostream& o, LinkedList& list) {
+	LinkedList::Node* current = list._head;
+	for (int i = 0; i < list._size; ++i) {
+		o << current->_value << " ";
+		current = current->_next;
+	}
+	o << ": size - " << list._size;
+	return o;
 }

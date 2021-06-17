@@ -17,3 +17,9 @@ SingleLinkedList/SingleLinkedList/Debug/SingleLinkedList.log
 *.idb
 *.pdb
 Node.h
+*.ipch
+*.exe
+*.ilk
+*.recipe
+SingleLinkedList/SingleLinkedList/main.cpp
+main.cpp
