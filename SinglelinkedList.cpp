@@ -139,19 +139,28 @@ ValueType& LinkedList::operator[](const size_t pos) {
 LinkedList::Node* LinkedList::getNode(const size_t pos) const {
 	Node* current = _head;
 	for (int i = 0; i < pos; ++i) {
-		current = current->_next;
+		if (current->_next != nullptr) {
+			current = current->_next;
+		}
 	}
 	return current;
 }
 
 void LinkedList::insert(const size_t pos, const ValueType& value) {
-	Node* current = getNode(pos);
+	Node* current;
+	if (!pos) {
+		current = getNode(pos);
+	}
+	else {
+		current = getNode(pos - 1);
+	}
+	std::cout << current->_value << std::endl;
 	current->insertNext(value);
 	++_size;
 }
 
 void LinkedList::pushBack(const ValueType& value) {
-	insert(_size - 1, value);
+	insert(_size, value);
 }
 
 void LinkedList::pushFront(const ValueType& value) {
@@ -263,6 +272,6 @@ std::ostream& operator<<(std::ostream& o, LinkedList& list) {
 		o << current->_value << " ";
 		current = current->_next;
 	}
-	o << ": size - " << list._size;
+	o << ": size - " << list._size << std::endl;
 	return o;
 }
